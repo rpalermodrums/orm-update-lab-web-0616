@@ -28,7 +28,7 @@ describe "Student" do
     end
   end
 
-  describe "#create_table" do
+  describe ".create_table" do
     it 'creates the students table in the database' do
       Student.create_table
       table_check_sql = "SELECT tbl_name FROM sqlite_master WHERE type='table' AND tbl_name='students';"
@@ -36,7 +36,7 @@ describe "Student" do
     end
   end
 
-  describe "#drop_table" do
+  describe ".drop_table" do
     it 'drops the students table from the database' do
       Student.drop_table
       table_check_sql = "SELECT tbl_name FROM sqlite_master WHERE type='table' AND tbl_name='students';"
@@ -63,14 +63,14 @@ describe "Student" do
     end
   end
 
-  describe "#create" do
+  describe ".create" do
     it 'creates a student object with name and grade attributes' do
       Student.create("Sally", "10th")
       expect(DB[:conn].execute("SELECT * FROM students")).to eq([[1, "Sally", "10th"]])
     end
   end
 
-  describe '#new_from_db' do
+  describe '.new_from_db' do
     it 'creates an instance with corresponding attribute values' do
       row = [1, "Pat", 12]
       pat = Student.new_from_db(row)
@@ -81,7 +81,7 @@ describe "Student" do
     end
   end
 
-  describe '#find_by_name' do
+  describe '.find_by_name' do
     it 'returns an instance of student that matches the name from the DB' do
       josh.save
       josh_id = josh.id
